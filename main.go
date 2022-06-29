@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -16,12 +17,15 @@ func main() {
 
 	//	http.ListenAndServe(":8080", nil)
 
-	var i ironman
-	var w wolwerine
-	mux := http.NewServeMux()
-	mux.Handle("/ironman", i)
-	mux.Handle("/wolwerine", w)
-	http.ListenAndServe(":8080", mux)
+	// var i ironman
+	// var w wolwerine
+	// mux := http.NewServeMux()
+	// mux.Handle("/ironman", i)
+	// mux.Handle("/wolwerine", w)
+	// http.ListenAndServe(":8080", mux)
+	var yazi string
+	fmt.Scan(&yazi)
+	fmt.Println(yazi + "s")
 
 }
 
