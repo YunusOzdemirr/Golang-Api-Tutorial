@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -23,10 +24,20 @@ func main() {
 	// mux.Handle("/ironman", i)
 	// mux.Handle("/wolwerine", w)
 	// http.ListenAndServe(":8080", mux)
-	var yazi string
-	fmt.Scan(&yazi)
-	fmt.Println(yazi + "s")
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":5555", nil)
+}
+func handler(w http.ResponseWriter, r *http.Request) {
+	var body, _ = loadFile("html/index.html")
+	fmt.Fprint(w, body)
+}
 
+func loadFile(fileName string) (string, error) {
+	bytes, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -39,7 +50,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("About Page"))
+	w.Write([]byte("Abox ut Page"))
 }
 
 type ironman int
